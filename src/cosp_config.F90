@@ -186,6 +186,18 @@ MODULE MOD_COSP_CONFIG
     real(wp),parameter,dimension(nLWP) :: &
          LWP_binCenters = (LWP_binEdges(1,:)+LWP_binEdges(2,:))/2._wp
 
+    ! YQIN 04/24/24
+    integer, parameter :: &
+        nIWP = 7
+    real(wp),parameter,dimension(nIWP+1) :: &
+        IWP_binBounds = (/0., 0.02, 0.05, 0.10, 0.20, 0.40, 1.00, 20.0/) ! kg/m2
+    real(wp),parameter,dimension(2,nIWP) :: &
+        IWP_binEdges = reshape(source=(/IWP_binBounds(1),((IWP_binBounds(k),  &
+                                l=1,2),k=2,nIWP),IWP_binBounds(nIWP+1)/),  &
+                                shape = (/2,nIWP/))
+    real(wp),parameter,dimension(nIWP) :: &
+        IWP_binCenters = (IWP_binEdges(1,:)+IWP_binEdges(2,:))/2._wp
+
     ! ####################################################################################  
     ! Constants used by RTTOV.
     ! ####################################################################################  
@@ -318,6 +330,17 @@ MODULE MOD_COSP_CONFIG
          modis_histLWPCenters = LWP_binCenters ! LWP bin centers
     real(wp),parameter,dimension(2,nLWP) :: &
          modis_histLWPEdges = LWP_binEdges     ! LWP bin edges
+
+
+    ! Ice YQIN 04/24/24
+    integer,parameter :: &
+         numMODISIWPBins = nIWP                        ! Number of bins for joint-histogram
+    real(wp),parameter,dimension(nIWP+1) :: &
+         modis_histIWP = IWP_binBounds                 ! IWP bin boundaries 
+    real(wp),parameter,dimension(nIWP) :: &
+         modis_histIWPCenters = IWP_binCenters         ! IWP bin centers
+    real(wp),parameter,dimension(2,nIWP) :: &
+         modis_histIWPEdges = IWP_binEdges             ! IWP bin edges
 
     ! ####################################################################################
     ! CLOUDSAT reflectivity histogram information 
