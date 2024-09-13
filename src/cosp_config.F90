@@ -151,16 +151,17 @@ MODULE MOD_COSP_CONFIG
     integer :: i,j
     integer,parameter :: &
          nReffLiq = 6, & ! Number of bins for tau/ReffLiq joint-histogram
-         nReffIce = 6    ! Number of bins for tau/ReffICE joint-histogram
+         nReffIce = 7    ! Number of bins for tau/ReffICE joint-histogram # YQIN 09/13/24
     ! YQIN 04/04/23 change reffLIQ bins following Casey's requirement
 !    real(wp),parameter,dimension(nReffLiq+1) :: &
 !         reffLIQ_binBounds = (/0., 8e-6, 1.0e-5, 1.3e-5, 1.5e-5, 2.0e-5, 3.0e-5/)
     real(wp),parameter,dimension(nReffLiq+1) :: &
          reffLIQ_binBounds = (/4.0e-6, 8e-6, 1.0e-5, 1.25e-5, 1.5e-5, 2.0e-5, 3.0e-5/)
 ! YQIN 09/08/24: Bin edges match Pincus et al. 2023 observational data
+! YQIN 09/13/24: Added one more reffIce bin edge
     real(wp),parameter,dimension(nReffIce+1) :: &
 !         reffICE_binBounds = (/0., 1.0e-5, 2.0e-5, 3.0e-5, 4.0e-5, 6.0e-5, 9.0e-5/)
-         reffICE_binBounds = (/5.0e-6, 1.0e-5, 2.0e-5, 3.0e-5, 4.0e-5, 5.0e-5, 6.0e-5/)
+         reffICE_binBounds = (/5.0e-6, 1.0e-5, 2.0e-5, 3.0e-5, 4.0e-5, 5.0e-5, 6.0e-5, 9.0e-5/)
     real(wp),parameter,dimension(2,nReffICE) :: &
          reffICE_binEdges = reshape(source=(/reffICE_binBounds(1),((reffICE_binBounds(k),  &
                                     l=1,2),k=2,nReffICE),reffICE_binBounds(nReffICE+1)/),  &
